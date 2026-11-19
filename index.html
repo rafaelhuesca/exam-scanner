@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d65">
+  <title>EXAM SCANNER</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script async src="https://docs.opencv.org/4.x/opencv.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">▣ EXAM SCANNER</div>
+  <div class="tag">Lector óptico de respuestas · 20 preguntas</div>
+</header>
+<main>
+  <section class="panel">
+    <h1>1. Configurar examen</h1>
+    <div class="formgrid">
+      <label>Nombre del examen<input id="examName" value="Examen de práctica"></label>
+      <label>Materia<input id="subject" placeholder="Cultura Digital"></label>
+      <label>Grupo<input id="group" placeholder="3° A"></label>
+      <label>Nombre del alumno<input id="student" placeholder="Nombre completo"></label>
+    </div>
+    <h2>Clave de respuestas</h2>
+    <p class="hint">Selecciona la respuesta correcta para cada pregunta.</p>
+    <div id="answerKey" class="key-grid"></div>
+    <div class="actions">
+      <button id="saveConfig" class="secondary">Guardar configuración en este dispositivo</button>
+      <button id="downloadSheet" class="secondary">Imprimir hoja de respuestas</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h1>2. Fotografiar y leer respuestas</h1>
+    <p class="hint">Coloca la hoja completa dentro del encuadre, con buena luz y sin sombras. La cámara requiere HTTPS y permiso del navegador.</p>
+    <div class="camera-wrap">
+      <video id="video" autoplay playsinline muted></video>
+      <canvas id="captureCanvas" hidden></canvas>
+      <div id="cameraPlaceholder" class="placeholder">La vista de cámara aparecerá aquí.</div>
+    </div>
+    <div class="actions">
+      <button id="startCamera">Activar cámara</button>
+      <button id="takePhoto" disabled>Tomar fotografía y calificar</button>
+      <label class="file-button">Elegir foto de galería<input id="fileInput" type="file" accept="image/*" capture="environment"></label>
+    </div>
+    <p id="opencvStatus" class="status">Cargando OpenCV.js…</p>
+    <p id="scanStatus" class="status" aria-live="polite"></p>
+    <canvas id="debugCanvas" class="debug"></canvas>
+  </section>
+
+  <section class="panel">
+    <h1>3. Resultado</h1>
+    <div id="resultEmpty" class="hint">Aún no hay un examen procesado.</div>
+    <div id="result" hidden>
+      <div class="stats">
+        <div><strong id="score">0.00</strong><span>Calificación / 10</span></div>
+        <div><strong id="hits">0</strong><span>Aciertos</span></div>
+        <div><strong id="misses">0</strong><span>Errores</span></div>
+        <div><strong id="blank">0</strong><span>Sin contestar</span></div>
+      </div>
+      <p id="resultMeta"></p>
+      <div id="answersReview" class="review"></div>
+      <div class="actions">
+        <button id="saveSheets">Guardar resultado en Google Sheets</button>
+        <button id="downloadCsv" class="secondary">Descargar CSV</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h1>4. Conectar Google Sheets</h1>
+    <label>URL de la aplicación web de Apps Script
+      <input id="scriptUrl" type="url" placeholder="https://script.google.com/macros/s/…/exec">
+    </label>
+    <p class="hint">La URL se guarda en este dispositivo. Consulta README.md para crear y publicar el conector.</p>
+  </section>
+</main>
+<footer>EXAM SCANNER · Procesamiento local en el navegador. Verifica visualmente las marcas dudosas antes de registrar una calificación.</footer>
+<script src="js/app.js"></script>
+<script src="js/omr.js"></script>
+</body>
+</html>
