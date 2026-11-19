@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><title>Hoja de respuestas EXAM SCANNER</title>
+<style>
+@page{size:letter;margin:0}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#111}
+.sheet{width:850px;height:1100px;margin:0 auto;border:5px solid #000;padding:30px 42px;position:relative}
+h1{text-align:center;font-size:25px;margin:8px 0 4px}.sub{text-align:center;font-size:12px;margin-bottom:22px}
+.fields{font-size:15px;line-height:2.5;margin-bottom:18px}.line{display:inline-block;border-bottom:1px solid #111;min-width:300px;height:22px}
+.instructions{text-align:center;font-size:12px;border:1px solid #111;padding:7px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;table-layout:fixed}td{height:35px;font-size:15px;text-align:center}td:first-child{width:80px;text-align:left;padding-left:10px;font-weight:bold}
+.bubble{display:inline-block;width:22px;height:22px;border:2px solid #000;border-radius:50%;vertical-align:middle}
+.letters{font-size:11px;font-weight:bold;margin-left:3px}
+.footer{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:10px}
+@media print{body{width:8.5in;height:11in}.sheet{margin:0}}
+</style></head>
+<body><div class="sheet">
+<h1>EXAM SCANNER</h1><div class="sub">HOJA DE RESPUESTAS · 20 PREGUNTAS</div>
+<div class="fields">Nombre: <span class="line" style="min-width:490px"></span><br>
+Grupo: <span class="line" style="min-width:180px"></span> &nbsp; Materia: <span class="line" style="min-width:300px"></span><br>
+Examen: <span class="line" style="min-width:490px"></span></div>
+<div class="instructions">Rellena completamente un solo círculo por pregunta. No hagas marcas fuera de los círculos.</div>
+<table id="answers"></table>
+<div class="footer">Coloca la hoja plana y fotografía el documento completo. No dobles ni recortes el marco.</div>
+</div>
+<script>
+const table=document.getElementById('answers');
+for(let i=1;i<=20;i++){
+ const tr=document.createElement('tr');
+ tr.innerHTML=`<td>${String(i).padStart(2,'0')}.</td>`+['A','B','C','D'].map(l=>`<td><span class="bubble"></span><span class="letters">${l}</span></td>`).join('');
+ table.appendChild(tr);
+}
+</script></body></html>
